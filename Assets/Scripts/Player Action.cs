@@ -19,7 +19,7 @@ public class PlayerAction : MonoBehaviour
     public bool isSprinting => _isSprinting;
     public bool isCrouching => _isCrouching;
     public bool isAiming => _isAiming;
-    private float _sprintSpeed = 8.0f, _moveSpeed = 5.0f, _jumpPower = 5f;
+    private float _sprintSpeed = 8.0f, _moveSpeed = 5.0f, _jumpPower = 5f, _reloadCompletionTime = 1f, _shootingTime;
     public Vector3 moveVector;
     private GroundController _groundController;
     public GroundController groundController => _groundController;
@@ -162,7 +162,7 @@ public class PlayerAction : MonoBehaviour
 
     private void StartReload()
     {
-        Invoke("CompleteReload", 1f);
+        Invoke("CompleteReload", _reloadCompletionTime);
     }
 
     private void CompleteReload()

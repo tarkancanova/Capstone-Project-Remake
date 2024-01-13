@@ -6,16 +6,16 @@ using Zenject;
 public class Shoot : MonoBehaviour
 {
     [Inject] Projectile projectile;
-    [Inject] PlayerAction playerAction;
-    [Inject] Weapon weapon;
     private float _bulletSpeed = 300f;
     private Transform _bulletSpawnTransform;
+    private float _bulletDeactivationTime = 2.5f;
 
     private void Update()
     {
-        _bulletSpawnTransform = weapon.gameObject.transform;
-
+        _bulletSpawnTransform = gameObject.transform;
     }
+
+
     public IEnumerator ShootProjectile()
     {
         Vector3 force = _bulletSpawnTransform.forward * _bulletSpeed;
@@ -26,7 +26,7 @@ public class Shoot : MonoBehaviour
             bullet.transform.rotation = _bulletSpawnTransform.rotation;
             bullet.SetActive(true);
             bullet.transform.GetComponent<Rigidbody>().velocity = force;
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(_bulletDeactivationTime);
             bullet.SetActive(false);
         }
     }

@@ -5,7 +5,7 @@ using Zenject;
 
 public class Weapon : MonoBehaviour
 {
-    public WeaponSO pistol;
+    public WeaponSO weaponSO;
 
     private int _ammoInMagazine;
     public int ammoInMagazine => _ammoInMagazine;
@@ -15,29 +15,28 @@ public class Weapon : MonoBehaviour
     public int magazineSize => _magazineSize;
     private int _maxAmmo;
     public int maxAmmo => _maxAmmo;
-    private float _fireRate;
-    public float fireRate => _fireRate;
     private int _spawnAmmo;
     public int spawnAmmo => _spawnAmmo;
     private Muzzle _muzzle;
-    [Inject] Shoot shoot;
+    private Shoot _shoot;
     [Inject] PlayerAction playerAction;
     public PlayerInventorySO _playerInventorySO;
 
     private void Awake()
     {
+        _shoot = gameObject.GetComponent<Shoot>();
+
         _ammoInMagazine = 10;
-        _damage = pistol.damage;
-        _magazineSize = pistol.magazineSize;
-        _maxAmmo = pistol.ammoCapacity;
-        _fireRate = pistol.fireRate;
-        _spawnAmmo = pistol.spawnAmmo;
+        _damage = weaponSO.damage;
+        _magazineSize = weaponSO.magazineSize;
+        _maxAmmo = weaponSO.ammoCapacity;
+        _spawnAmmo = weaponSO.spawnAmmo;
         _muzzle = GetComponentInChildren<Muzzle>();
     }
 
     public void Shoot()
     {
-        StartCoroutine(shoot.ShootProjectile());
+        StartCoroutine(_shoot.ShootProjectile());
         _ammoInMagazine -= 1;
         ActivateMuzzle();
     }

@@ -11,8 +11,6 @@ public class ZenjectInstaller : MonoInstaller
         Container.Bind<PlayerAction>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Gravity>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Projectile>().FromComponentInHierarchy().AsTransient();
-        Container.Bind<Weapon>().FromComponentInHierarchy().AsTransient();
-        Container.Bind<Shoot>().FromComponentInHierarchy().AsTransient();
         Container.Bind<PlayerInventory>().FromComponentInHierarchy().AsSingle();
     }
 }
