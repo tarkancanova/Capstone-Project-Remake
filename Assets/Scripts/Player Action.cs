@@ -26,6 +26,7 @@ public class PlayerAction : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 15f;
     [Inject] Gravity gravity;
     private Weapon _weapon;
+    [SerializeField] public PlayerInventorySO _playerInventorySO;
 
     //[SerializeField] CinemachineVirtualCamera tpsCamera;
     //[SerializeField] CinemachineVirtualCamera aimCamera;
@@ -63,6 +64,7 @@ public class PlayerAction : MonoBehaviour
         Move();
         Jump();
         gravity.ApplyGravity();
+        Debug.Log(_weapon.ammoInMagazine + " " + _playerInventorySO.currentAmmo + " " + _isReloading);
     }
 
     private void HandleReload(InputAction.CallbackContext context)
@@ -173,6 +175,8 @@ public class PlayerAction : MonoBehaviour
         }
         _isReloading = false;
     }
+
+
 
     private void OnEnable()
     {

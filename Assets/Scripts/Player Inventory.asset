@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20874f3a4ea22b94db6e594f78610eaa, type: 3}
   m_Name: Player Inventory
   m_EditorClassIdentifier: 
-  currentAmmo: 0
-  currentGrenade: 0
+  currentAmmo: 30
+  currentGrenade: 1

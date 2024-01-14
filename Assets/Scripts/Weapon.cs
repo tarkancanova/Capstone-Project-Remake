@@ -8,7 +8,11 @@ public class Weapon : MonoBehaviour
     public WeaponSO weaponSO;
 
     private int _ammoInMagazine;
-    public int ammoInMagazine => _ammoInMagazine;
+    public int ammoInMagazine
+    {
+        get { return _ammoInMagazine; }
+        set { _ammoInMagazine = value;}
+    }
     private int _damage;
     public int damage => _damage;
     private int _magazineSize;
@@ -48,13 +52,24 @@ public class Weapon : MonoBehaviour
 
     public void Reload()
     {
-        if (_playerInventorySO.currentAmmo > 0 && _ammoInMagazine < 10)
+        if (_playerInventorySO.currentAmmo < 101) //since max ammo player can carry is equal to 100, if it is thought that adding a modifier to increase max ammo, another solution could be implemented.
+        {
+            if (_playerInventorySO.currentAmmo > 0 && _ammoInMagazine < 10)
+            {
+                int ammoNeeded = 10 - _ammoInMagazine;
+                int ammoToReload = Mathf.Min(ammoNeeded, _playerInventorySO.currentAmmo);
+
+                _ammoInMagazine += ammoToReload;
+                _playerInventorySO.currentAmmo -= ammoToReload;
+            }
+
+        }
+
+        else
         {
             int ammoNeeded = 10 - _ammoInMagazine;
-            int ammoToReload = Mathf.Min(ammoNeeded, _playerInventorySO.currentAmmo);
 
-            _ammoInMagazine += ammoToReload;
-            _playerInventorySO.currentAmmo -= ammoToReload;
+            _ammoInMagazine += ammoNeeded;
         }
     }
 

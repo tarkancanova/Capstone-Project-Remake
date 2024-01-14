@@ -9,6 +9,7 @@ public class EnemyShoot : MonoBehaviour
     [Inject] PlayerAction playerAction;
     Weapon weapon;
     bool isShooting;
+    private float _reloadCompletionTime = 1f;
 
     private void Awake()
     {
@@ -19,20 +20,41 @@ public class EnemyShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(playerTransform.position);
-
-
-        if ((playerTransform.position.z - transform.position.z <= 0.3f || playerTransform.position.z - transform.position.z >= 0.3f) && isShooting == false)
+        if (playerAction != null)
         {
-            weapon.Shoot();
-            isShooting = true;
-            StartCoroutine(Falsification());
+            transform.LookAt(playerTransform.position);
+
+
+            if ((playerTransform.position.z - transform.position.z <= 1f && playerTransform.position.z - transform.position.z >= -1f) && isShooting == false && weapon.ammoInMagazine > 0)
+            {
+                weapon.Shoot();
+                isShooting = true;
+                StartCoroutine(Falsification());
+            }
+
         }
+
+        if (weapon.ammoInMagazine == 0)
+        {
+            StartReload();
+        }
+
+
     }
 
     IEnumerator Falsification()
     {
         yield return new WaitForSeconds(0.3f);
         isShooting = false;
+    }
+
+    private void StartReload()
+    {
+        Invoke("CompleteReload", _reloadCompletionTime);
+    }
+
+    private void CompleteReload()
+    {
+        weapon.Reload();
     }
 }
