@@ -12,5 +12,6 @@ public class ZenjectInstaller : MonoInstaller
         Container.Bind<Gravity>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Projectile>().FromComponentInHierarchy().AsTransient();
         Container.Bind<PlayerInventory>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<Loot>().FromComponentInHierarchy().AsSingle();
     }
 }

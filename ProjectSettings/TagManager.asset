@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Lootbox
   - Bullet
+  - Grenade
+  - Magazine
   layers:
   - Default
   - TransparentFX
@@ -15,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Ground
+  - Player
   - 
   - 
   - 

@@ -10,6 +10,7 @@ public class HealthSystem : MonoBehaviour
     public int currentHealth;
     private int _maxHealth;
     public bool alive = true;
+    [Inject] private Loot _loot;
 
 
     private void Awake()
@@ -49,7 +50,7 @@ public class HealthSystem : MonoBehaviour
             }
             else if (gameObject.CompareTag("Enemy") || gameObject.CompareTag("Lootbox"))
             {
-                //_loot.LootDrop();
+                _loot.DropLoot(new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y + 0.5f, gameObject.transform.position.z));
             }
         }
     }

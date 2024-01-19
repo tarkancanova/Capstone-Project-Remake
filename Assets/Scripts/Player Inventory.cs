@@ -5,13 +5,14 @@ using UnityEngine.Rendering;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public WeaponSO pistol;
+    public WeaponSO pistolSO;
     public PlayerInventorySO _playerInventorySO;
+    public GrenadeSO grenadeSO;
 
 
     private void Awake()
     {
-        _playerInventorySO.currentAmmo = pistol.spawnAmmo;
-        //_playerInventorySO.currentGrenade = grenade.grenadeAmountAtSpawn;
+        _playerInventorySO.currentAmmo = pistolSO.spawnAmmo;
+        _playerInventorySO.currentGrenade = grenadeSO.grenadesAtSpawn;
     }
 }

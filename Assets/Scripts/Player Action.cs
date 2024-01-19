@@ -11,6 +11,7 @@ public class PlayerAction : MonoBehaviour
     public CharacterController characterController;
     private bool _isSprintPressed, _isJumpPressed, _isSprinting, _isRunning, _isMovePressed,
     _isAiming, _isShooting, _isGrenadeGettingThrown, _isReloading, _reloadStarted, _isCrouching, _bombWaiting, _isJumping;
+    public bool isGrenadeGettingThrown => _isGrenadeGettingThrown;
     public bool isReloading => _isReloading;
     public bool isShooting => _isShooting;
     public bool isJumping => _isJumpPressed;
@@ -19,14 +20,18 @@ public class PlayerAction : MonoBehaviour
     public bool isSprinting => _isSprinting;
     public bool isCrouching => _isCrouching;
     public bool isAiming => _isAiming;
-    private float _sprintSpeed = 8.0f, _moveSpeed = 5.0f, _jumpPower = 5f, _reloadCompletionTime = 1f, _shootingTime;
+
+    private float _sprintSpeed = 8.0f, _moveSpeed = 5.0f, _jumpPower = 5f, _reloadCompletionTime = 1f;
     public Vector3 moveVector;
     private GroundController _groundController;
     public GroundController groundController => _groundController;
     [SerializeField] private float _rotationSpeed = 15f;
+    [SerializeField] private GameObject _grenadePrefab;
     [Inject] Gravity gravity;
     private Weapon _weapon;
     [SerializeField] public PlayerInventorySO _playerInventorySO;
+    [SerializeField] private float _throwForce;
+    public float throwForce => _throwForce;
 
     //[SerializeField] CinemachineVirtualCamera tpsCamera;
     //[SerializeField] CinemachineVirtualCamera aimCamera;
@@ -52,8 +57,8 @@ public class PlayerAction : MonoBehaviour
         playerControls.Player.Shoot.started += HandleShoot;
         playerControls.Player.Shoot.canceled += HandleShoot;
         playerControls.Player.Reload.started += HandleReload;
-        //_playerControls.Player.Throw.started += HandleGrenade;
-        //_playerControls.Player.Throw.canceled += HandleGrenade;
+        playerControls.Player.Throw.started += HandleGrenade;
+        playerControls.Player.Throw.canceled += HandleGrenade;
         //_playerControls.Player.Crouch.started += HandleCrouch;
         //_playerControls.Player.Crouch.canceled += HandleCrouch;
     }
@@ -65,6 +70,7 @@ public class PlayerAction : MonoBehaviour
         Jump();
         gravity.ApplyGravity();
         Debug.Log(_weapon.ammoInMagazine + " " + _playerInventorySO.currentAmmo + " " + _isReloading);
+        ThrowGrenade();
     }
 
     private void HandleReload(InputAction.CallbackContext context)
@@ -81,14 +87,14 @@ public class PlayerAction : MonoBehaviour
     }
     private void HandleGrenade(InputAction.CallbackContext context)
     {
-        //if (context.started && _inventory.grenadeAmount > 0)
-        //{
-        //    isGrenadeGettingThrown = true;
-        //}
-        //else if (context.canceled)
-        //{
-        //    isGrenadeGettingThrown = false;
-        //}
+        if (context.started && _playerInventorySO.currentGrenade > 0)
+        {
+            _isGrenadeGettingThrown = true;
+        }
+        else if (context.canceled)
+        {
+            _isGrenadeGettingThrown = false;
+        }
     }
     private void HandleMovementInput(InputAction.CallbackContext context)
     {
@@ -174,6 +180,18 @@ public class PlayerAction : MonoBehaviour
             _weapon.Reload();
         }
         _isReloading = false;
+    }
+
+    private void ThrowGrenade()
+    {
+        if (_isGrenadeGettingThrown)
+        {
+            _playerInventorySO.currentGrenade -= 1;
+            GameObject grenade = Instantiate(_grenadePrefab, transform.position + transform.forward / 2, transform.rotation);
+            Rigidbody rb = grenade.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * _throwForce / 3 + transform.up * _throwForce / 6, ForceMode.Impulse);
+            _isGrenadeGettingThrown = false;
+        }
     }
 
 

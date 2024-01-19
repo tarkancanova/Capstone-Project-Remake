@@ -22,7 +22,9 @@ public class EnemyShoot : MonoBehaviour
     {
         if (playerAction != null)
         {
-            transform.LookAt(playerTransform.position);
+            Vector3 target = playerTransform.position;
+            target.y = 0;
+            transform.LookAt(target);
 
 
             if ((playerTransform.position.z - transform.position.z <= 1f && playerTransform.position.z - transform.position.z >= -1f) && isShooting == false && weapon.ammoInMagazine > 0)
