@@ -1,4 +1,4 @@
-# Aim system will be replaced with something better as soon as possible.
+# Aim system will be replaced with something better and civilian quests will be added as soon as possible. 
 
 # Invasion of the Cupcakes 
 
@@ -8,10 +8,13 @@ Concept: In the past, people launched Voyager, which contains crucial informatio
 
 Main Character is a soldier from the Space Forces, a hero adept at using weapons after undergoing rigorous training.
 
+![Ekran görüntüsü 2024-01-22 113838](https://github.com/tarkancanova/Invasion-of-the-Cupcakes/assets/43688860/66d70319-a449-4a34-8ad8-7409e5c89e75)
+
 Story Beginning:
 The game starts with the main character waking up in a forest near the military base. The soldier rushes towards the base, witnessing the destruction caused by giant cupcakes and the helplessness of humanity.
 
 Objective:
 The main character is tasked with cleaning the base and rescuing humans from the oppression of the cupcakes. As the player progresses through a map filled with various tasks, they must battle giant cupcakes, fight cupcake warriors who have taken over the base, and rescue captured civilians.
  
+
 
