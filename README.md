@@ -2,7 +2,7 @@
 
 ![invasion-of-the-cupcakes-high-resolution-logo (1)](https://github.com/tarkancanova/Invasion-of-the-Cupcakes/assets/43688860/be976bd9-90d2-4075-97b3-9ef325d2758f)
 
-Concept: In the future, humanity sent crucial information and a cupcake into space. However, after Voyager collided with a planet, giant cupcakes fell to Earth, enslaving humans and mercilessly eliminating those who resisted. The game revolves around a soldier who, having fallen asleep in the forest, attempts to reclaim the overrun military base.
+Concept: In the past, people launched Voyager, which contains crucial information about humanity and a cupcake. However, Voyager collided with a planet far away. After an uncertain amount of time passed without receiving signals from Voyager, giant cupcakes started falling to Earth. The giant cupcakes enslaved humans, mercilessly eliminating those who resisted. The game revolves around a soldier who, having fallen asleep in the forest after a night of drinking, attempts to reclaim the overrun military base.
 
 Main Character is a soldier from the Space Forces, a hero adept at using weapons after undergoing rigorous training.
 
